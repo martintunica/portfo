@@ -4,24 +4,24 @@ import csv
 app = Flask(__name__)
 print(__name__)
 
-#ruta a home
+#home route
 @app.route("/")
 def world():
     return render_template('index.html')
-#ruta a html's
+#html's routes
 @app.route("/<string:page_name>")
 def html_page(page_name):
     return render_template(page_name)
 
 
-#pasar el formulario a database txt
+#forn to database txt
 def write_to_file(data):
 	with open('database.txt', mode='a') as database:
 		email = data["email"]
 		subject = data["subject"]
 		messege = data["messege"]
 		file = database.write(f'\n{email},\t{subject},\t{messege}')
-# pasar formulario a csv database
+# form to csv database
 def write_to_csv(data):
 	with open('database.csv', newline='', mode='a') as database2:
 		email = data["email"]
@@ -31,7 +31,7 @@ def write_to_csv(data):
 		csv_writer.writerow([email,subject,messege])
 
 
-#envio de formulario contacto
+#form send
 @app.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
     if request.method == "POST":
@@ -46,7 +46,7 @@ def submit_form():
        
 
 
-#rutas a html (clean code)
+# html routs (clean code)
 
 # @app.route("/works.html")
 # def works():
